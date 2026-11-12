@@ -24,6 +24,12 @@ const FIELDS = [
   'wakes',
   'sha256',
 ];
+// What an app may say beside them: the hosts it reaches on the internet,
+// and the account of the person's it uses.
+const MAY_HAVE = ['reaches', 'account'];
+const MOST_HOSTS = 4;
+const HOST =
+  /^(?=.{1,253}$)([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]([a-z0-9-]{0,61}[a-z0-9])?$/u;
 
 const problems = [];
 const oneLine = text =>
@@ -37,12 +43,14 @@ function checkEntry(entry, index, seen) {
     return;
   }
 
-  const unknown = Object.keys(entry).filter(key => !FIELDS.includes(key));
+  const unknown = Object.keys(entry).filter(
+    key => !FIELDS.includes(key) && !MAY_HAVE.includes(key),
+  );
   const missing = FIELDS.filter(key => !(key in entry));
 
   if (unknown.length > 0 || missing.length > 0) {
     problems.push(
-      `${at} must have exactly ${FIELDS.join(', ')}` +
+      `${at} must have ${FIELDS.join(', ')}, and may have ${MAY_HAVE.join(' and ')}` +
         (missing.length > 0 ? `; missing ${missing.join(', ')}` : '') +
         (unknown.length > 0 ? `; unknown ${unknown.join(', ')}` : ''),
     );
@@ -72,6 +80,26 @@ function checkEntry(entry, index, seen) {
 
   if (typeof entry.wakes !== 'boolean') {
     problems.push(`${named} wakes must be true or false`);
+  }
+
+  const reaches = entry.reaches ?? [];
+
+  if (
+    !Array.isArray(reaches) ||
+    reaches.length > MOST_HOSTS ||
+    new Set(reaches).size !== reaches.length ||
+    !reaches.every(host => typeof host === 'string' && HOST.test(host))
+  ) {
+    problems.push(
+      `${named} reaches must name at most ${MOST_HOSTS} hosts, each once: DNS names in lowercase with no scheme, port or path`,
+    );
+  }
+
+  if (
+    entry.account !== undefined &&
+    (typeof entry.account !== 'string' || !ID.test(entry.account))
+  ) {
+    problems.push(`${named} account must be the id of an account, in lowercase`);
   }
 
   if (typeof entry.version !== 'string' || !VERSION.test(entry.version)) {

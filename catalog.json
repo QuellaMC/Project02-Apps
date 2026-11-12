@@ -11,6 +11,48 @@
       "changes": "The first version.",
       "wakes": true,
       "sha256": "7908dc58be97731703355d0982d0500b8c797b9eb8ec75c7d4518515fbed6fc8"
+    },
+    {
+      "id": "weather",
+      "name": "Weather",
+      "summary": "Today and the week ahead",
+      "icon": "sun",
+      "tint": "blue",
+      "version": "1.0.0",
+      "changes": "The first version.",
+      "wakes": false,
+      "reaches": [
+        "api.open-meteo.com",
+        "geocoding-api.open-meteo.com"
+      ],
+      "sha256": "b407c6664fd538c2d5cad8d433d1ba3aee0257c7779b6799caabda833fc3031f"
+    },
+    {
+      "id": "search",
+      "name": "Web Search",
+      "summary": "Look things up on the web",
+      "icon": "magnifier",
+      "tint": "mint",
+      "version": "1.0.0",
+      "changes": "The first version.",
+      "wakes": false,
+      "reaches": [
+        "api.tavily.com"
+      ],
+      "account": "tavily",
+      "sha256": "9c13d3880e829dfccaaa472ac9bf1d00993d63f8942e516af4e8efddac811433"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "summary": "Ask a stronger model for help",
+      "icon": "bulb",
+      "tint": "indigo",
+      "version": "1.0.0",
+      "changes": "The first version.",
+      "wakes": false,
+      "account": "chatgpt",
+      "sha256": "4b099e461862a827684781fa998e5c11b89cfc362aa61d85851a9ec358215dfa"
     }
   ]
 }

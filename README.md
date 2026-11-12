@@ -14,15 +14,22 @@ what her phone gives it:
 
 - a small store of its own data;
 - rings, which can wake her when something is due, if the app says it
-  wakes her and you allow it.
+  wakes her and you allow it;
+- the internet, only at the addresses the app names before you install
+  it, and, where it says so, an account of yours there. Your key for that
+  account is sent by Project02 itself: the app never holds it;
+- a model to ask, through an AI service you connected in Project02, and
+  only once you let that app sign in with it. Project02 asks for the app:
+  the app never holds what signs you in.
 
-It cannot read your files, reach the network, or see anything else on your
-computer. Every app here was read line by line before it was added.
+It cannot read your files, reach anywhere else, or see anything else on
+your computer. Every app here was read line by line before it was added.
 
 ## What is here
 
 - `catalog.json` is the list the App Store reads: each app's name, what it
-  is, its version, and the SHA-256 of its file.
+  is, its version, what it asks for (whether it wakes her, the addresses
+  it reaches, the account it uses), and the SHA-256 of its file.
 - `apps/<id>/<version>.js` is one version of one app. A file here is never
   changed once it is published: a change is a new version in a new file,
   so the App Store always installs exactly the file its entry describes.
