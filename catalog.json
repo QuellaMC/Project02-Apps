@@ -1,0 +1,16 @@
+{
+  "format": "project02.catalog.v1",
+  "apps": [
+    {
+      "id": "reminders",
+      "name": "Reminders",
+      "summary": "Things to do, on a day and time",
+      "icon": "list",
+      "tint": "orange",
+      "version": "1.0.0",
+      "changes": "The first version.",
+      "wakes": true,
+      "sha256": "7908dc58be97731703355d0982d0500b8c797b9eb8ec75c7d4518515fbed6fc8"
+    }
+  ]
+}
